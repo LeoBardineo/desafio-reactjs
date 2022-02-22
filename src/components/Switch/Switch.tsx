@@ -21,6 +21,7 @@ const Switch: React.FC<Props> = ({ toggleTheme }): JSX.Element => (
         name="switch"
         id="switch"
         onChange={toggleTheme}
+        checked={useContext(ThemeContext).title === 'dark'}
       />
       <SwitchBolinha />
     </SwitchBackground>
