@@ -8,7 +8,11 @@ import {
   SearchInput,
 } from './style';
 
-const Search = (): JSX.Element => {
+interface Props {
+  placeholder?: string;
+}
+
+const Search: React.FC<Props> = ({ placeholder }): JSX.Element => {
   const [username, setUsername] = useState('');
   const theme = useContext(ThemeContext);
 
@@ -19,18 +23,22 @@ const Search = (): JSX.Element => {
         name="username"
         id="username"
         className="search-input"
-        placeholder="Type the username here..."
+        placeholder={placeholder}
         onChange={(e) => setUsername(e.target.value)}
         value={username}
       />
       <SearchButton type="submit">
         <ButtonContaienr>
           <FiSearch fill={theme.primary} size="30px" />
-          Buscar
+          Search
         </ButtonContaienr>
       </SearchButton>
     </SearchContainer>
   );
+};
+
+Search.defaultProps = {
+  placeholder: 'Type the username here...',
 };
 
 export default Search;

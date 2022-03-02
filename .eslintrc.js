@@ -19,6 +19,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
+    'object-curly-newline': 'off',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/jsx-filename-extension': ['warn', { extensions: ['.tsx'] }],

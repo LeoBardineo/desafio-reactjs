@@ -4,6 +4,7 @@ export const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `;
 
 export const SearchButton = styled.button`
@@ -30,7 +31,8 @@ export const ButtonContaienr = styled.div`
 `;
 
 export const SearchInput = styled.input`
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 50px;
   padding: 12px 20px;
   outline: none;
