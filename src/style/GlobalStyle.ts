@@ -11,6 +11,10 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: ${(props) => props.theme.background};
   }

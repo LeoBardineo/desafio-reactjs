@@ -36,6 +36,7 @@ import {
   LinkSite,
 } from './style';
 import Switch from '../../components/Switch/Switch';
+import periodBetweenDate from '../../util/periodBetweenDate';
 
 interface Props {
   toggleTheme(): void;
@@ -66,7 +67,6 @@ interface Repo {
 }
 
 const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
-  const [toggle, setToggle] = useState(false);
   const [dev, setDev] = useState<Dev>({});
   const [repositories, setRepositories] = useState<Repo[]>([
     {
@@ -110,8 +110,6 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
     );
     setStars(starsCount);
   }, [repositories]);
-
-  const showRepositories = () => setToggle(!toggle);
 
   return (
     <ProfileWrapper>
@@ -174,28 +172,18 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
           <Link to="/" style={{ textDecoration: 'none' }}>
             <Button>Voltar</Button>
           </Link>
-          <ViewRepo onClick={showRepositories}>View repositories</ViewRepo>
+          <ViewRepo href="#repositories-section">View repositories</ViewRepo>
         </Divider>
       </Developer>
-      <Repositories>
+      <Repositories id="repositories-section">
         <Options>
           <Switch toggleTheme={toggleTheme} />
         </Options>
         {repositories.map((repo) => {
-          const lastUpdated = Math.max(
-            Date.parse(repo.updated_at),
-            Date.parse(repo.pushed_at),
+          const [dateDiff, period] = periodBetweenDate(
+            repo.updated_at,
+            repo.pushed_at,
           );
-          let dateDiff = Math.floor((Date.now() - lastUpdated) / 8.64e7);
-          let period = dateDiff === 1 ? 'day' : 'days';
-          if (dateDiff >= 30) {
-            dateDiff = Math.floor(dateDiff / 30);
-            period = dateDiff === 1 ? 'month' : 'months';
-          }
-          if (dateDiff >= 12) {
-            dateDiff = Math.floor(dateDiff / 12);
-            period = dateDiff === 1 ? 'year' : 'years';
-          }
           return (
             <Repository key={repo.id}>
               <RepoName href={repo.html_url} target="_blank">

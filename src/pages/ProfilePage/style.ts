@@ -134,6 +134,7 @@ export const ViewRepo = styled.a`
   color: ${(props) => props.theme.text};
   margin: 10px 0;
   cursor: pointer;
+  text-decoration: none;
   @media (max-width: 1100px) {
     display: block;
   }
@@ -141,10 +142,10 @@ export const ViewRepo = styled.a`
 
 export const Repositories = styled.div`
   width: 100%;
-  height: 100vh;
   background-color: ${(props) => props.theme.background};
   padding: 30px 50px;
   @media (min-width: 1100px) {
+    height: 100vh;
     overflow-y: scroll;
   }
 `;
