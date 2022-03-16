@@ -11,7 +11,10 @@ interface Props {
 const MainRoutes: React.FC<Props> = ({ toggleTheme }): React.ReactElement => (
   <Routes>
     <Route path="/" element={<HomePage toggleTheme={toggleTheme} />} />
-    <Route path="profile" element={<ProfilePage toggleTheme={toggleTheme} />} />
+    <Route
+      path="/profile/:id"
+      element={<ProfilePage toggleTheme={toggleTheme} />}
+    />
   </Routes>
 );
 

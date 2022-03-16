@@ -11,10 +11,10 @@ export const Developer = styled.div`
   display: flex;
   width: 30%;
   height: 100vh;
-  padding: 0 25px;
+  padding: 50px 25px;
   background-color: ${(props) => props.theme.secondary};
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   @media (max-width: 1100px) {
     width: 100%;
   }
@@ -103,6 +103,7 @@ export const Info = styled.div`
 `;
 
 export const InfoText = styled.span``;
+export const Divider = styled.div``;
 
 export const Button = styled.button`
   display: block;
@@ -114,6 +115,8 @@ export const Button = styled.button`
   cursor: pointer;
   background-color: ${(props) => props.theme.background};
 
+  text-decoration: none;
+  text-align: center;
   font-style: italic;
   font-weight: 300;
   font-size: 1.1em;
@@ -141,6 +144,9 @@ export const Repositories = styled.div`
   height: 100vh;
   background-color: ${(props) => props.theme.background};
   padding: 30px 50px;
+  @media (min-width: 1100px) {
+    overflow-y: scroll;
+  }
 `;
 
 export const Options = styled.div`
@@ -163,9 +169,11 @@ export const Repository = styled.div`
     font-size: 20px;
   }
 `;
-export const RepoName = styled.h1`
+export const RepoName = styled.a`
   font-weight: 300;
   font-size: 24px;
+  text-decoration: none;
+  color: ${(props) => props.theme.secondary};
 `;
 export const RepoDescription = styled.h2`
   font-weight: 300;
@@ -185,4 +193,9 @@ export const RepoStats = styled.div`
   display: flex;
   gap: 10px;
   color: ${(props) => props.theme.subtext};
+`;
+
+export const LinkSite = styled.a`
+  text-decoration: none;
+  color: ${(props) => props.theme.text};
 `;

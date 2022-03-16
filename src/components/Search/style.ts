@@ -17,7 +17,7 @@ export const SearchButton = styled.button`
   cursor: pointer;
 `;
 
-export const ButtonContaienr = styled.div`
+export const ButtonContainer = styled.div`
   color: ${(props) => props.theme.text};
   font-size: 22px;
   font-style: italic;
