@@ -103,6 +103,7 @@ export const Info = styled.div`
 `;
 
 export const InfoText = styled.span``;
+
 export const Divider = styled.div``;
 
 export const Button = styled.button`
@@ -170,22 +171,27 @@ export const Repository = styled.div`
     font-size: 20px;
   }
 `;
+
 export const RepoName = styled.a`
   font-weight: 300;
   font-size: 24px;
   text-decoration: none;
   color: ${(props) => props.theme.secondary};
 `;
+
 export const RepoDescription = styled.h2`
   font-weight: 300;
   font-size: 18px;
 `;
+
 export const RepoStars = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
 `;
+
 export const Dot = styled.span``;
+
 export const RepoUpdated = styled.p`
   font-size: 20px;
 `;
@@ -199,4 +205,18 @@ export const RepoStats = styled.div`
 export const LinkSite = styled.a`
   text-decoration: none;
   color: ${(props) => props.theme.text};
+`;
+
+export const Invalid = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Lato;
+  font-style: italic;
+  font-weight: 300;
+  color: ${(props) => props.theme.primary};
+  background-color: ${(props) => props.theme.background};
 `;

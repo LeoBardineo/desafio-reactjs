@@ -34,6 +34,7 @@ import {
   RepoUpdated,
   Divider,
   LinkSite,
+  Invalid,
 } from './style';
 import Switch from '../../components/Switch/Switch';
 import periodBetweenDate from '../../util/periodBetweenDate';
@@ -67,6 +68,7 @@ interface Repo {
 }
 
 const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
+  const [invalidUser, setInvalidUser] = useState(false);
   const [dev, setDev] = useState<Dev>({});
   const [repositories, setRepositories] = useState<Repo[]>([
     {
@@ -82,7 +84,8 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
     async function getDevInfo() {
       const devData = await fetch(`https://api.github.com/users/${id}`);
       const devJson = await devData.json();
-      setDev(devJson);
+      if (devData.status === 404) return setInvalidUser(true);
+      return setDev(devJson);
     }
 
     getDevInfo();
@@ -90,28 +93,41 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
 
   useEffect(() => {
     async function getRepo() {
-      const repoData = await fetch(`https://api.github.com/users/${id}/repos`);
-      const repoJson = await repoData.json();
-      const repositoriesSorted = repoJson.sort((a: Repo, b: Repo) => {
-        if (a.stargazers_count > b.stargazers_count) return -1;
-        if (a.stargazers_count < b.stargazers_count) return 1;
-        return 0;
-      });
-      setRepositories(repositoriesSorted);
+      if (!invalidUser) {
+        const repoData = await fetch(
+          `https://api.github.com/users/${id}/repos`,
+        );
+        const repoJson = await repoData.json();
+        const repositoriesSorted = repoJson.sort((a: Repo, b: Repo) => {
+          if (a.stargazers_count > b.stargazers_count) return -1;
+          if (a.stargazers_count < b.stargazers_count) return 1;
+          return 0;
+        });
+        setRepositories(repositoriesSorted);
+      }
     }
 
     getRepo();
   }, []);
 
   useEffect(() => {
-    const starsCount = repositories.reduce(
-      (count, repo) => count + repo.stargazers_count,
-      0,
-    );
-    setStars(starsCount);
+    if (!invalidUser) {
+      const starsCount = repositories.reduce(
+        (count, repo) => count + repo.stargazers_count,
+        0,
+      );
+      setStars(starsCount);
+    }
   }, [repositories]);
 
-  return (
+  return invalidUser ? (
+    <Invalid>
+      <h1>Invalid GitHub username</h1>
+      <Link to="/" style={{ textDecoration: 'none' }}>
+        <Button>Voltar</Button>
+      </Link>
+    </Invalid>
+  ) : (
     <ProfileWrapper>
       <Developer>
         <Divider>
