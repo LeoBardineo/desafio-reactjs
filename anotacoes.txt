@@ -1,0 +1,2 @@
+erro ao botar id inexistente no github
+toggleTheme sem precisar passar como filho, usar algo tipo useContext

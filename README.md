@@ -23,11 +23,72 @@ $ yarn start
 $ yarn build
 ```
 
-TODO:
 ## 🤖 Tecnologias utilizadas
 
-Explicar a sua motivação de escolha das libs e frameworks (ou o motivo de ter feito na mão).
+Como proposto pelo desafio, utilizei o **ReactJS**, e junto à ele optei pelo **TypeScript**, pois assim seria uma oportunidade de aprender a integrar TS ao React.
+
+Como boilerplate, utilizei o **create-react-app (CRA)**, já que com ele vem a estrutura pronta, com algumas dependências que ajudam no desenvolvimento, tendo apenas que mudar algumas coisas em relação ao **eslint** e **prettier**.
+
+Ao longo da aplicação também utilizei o **styled-components** para a estilização e componentização dos elementos, e o **react-router-dom**, para navegar entre as páginas.
 
 ## 📂 Estrutura do projeto
 
-Uma explicação sobre a estrutura do projeto.
+O projeto contém todo seu código dentro do diretório ``src``, onde está localizado os principais arquivos como o ``App.tsx``, ``index.tsx`` e o ``routes.tsx``, e outros diretórios, como o ``components``, ``hooks``, ``pages``, ``style`` e ``util``.
+
+O arquivo ``App.tsx`` contém o componente que provê estilização global às rotas e os temas light e dark com o ``ThemeProvider`` do ``styled-components``, o ``index.tsx`` renderiza o App no ``public/index.html`` na div com id root.
+
+No arquivo ``routes.tsx`` temos as rotas do projeto, que utiliza do ``react-router-dom`` para gerenciar as duas rotas, ``/`` e ``/profile/:id``, com suas respectivas páginas, ``HomePage`` e ``ProfilePage``.
+
+No diretório ``pages``, temos ambas as páginas, divididas em duas pastas cada uma com dois arquivos, o arquivo do componente da página, ``<Nome>Page.tsx``, e o arquivo da estilização da páginam, ``style.tsx``. Como estou utilizando o ``styled-components``, os componentes utilizados em cada página estão definidos no ``style.tsx``, e componentes compartilhados entre ambas as páginas, estão no diretório ``componentes``.
+
+No diretório ``components``, como dito anteriormente, contém componentes compartilhados entre ambas as páginas, divididos de forma similar ao diretório ``pages``, com dois arquivos dentro de um diretório com o nome do componente, ``<NomeDoComponente>.tsx`` e ``style.tsx``.
+
+No diretório ``hooks``, há hooks customizados para a utilização em toda a aplicação.
+
+No diretório ``styles``, há estilizações que são aplicadas globalmente no arquivo ``GlobalStyle.ts``, o arquivo ``themes.ts`` com os temas light e dark com suas respectivas cores para cada parte das páginas e componentes, e o ``styled.d.ts``, que contém a tipagem desses temas.
+
+No diretório ``util``, há códigos utilitários, que podem ser desaclopados de onde são utilizados para serem usados amplamente em toda a aplicação.
+
+```bash
+.
+├── LICENSE     
+├── README.md   
+├── package.json
+├── public
+│   ├── favicon.ico  
+│   ├── index.html   
+│   ├── logo192.png  
+│   ├── logo512.png  
+│   ├── manifest.json
+│   └── robots.txt   
+├── src
+│   ├── App.tsx      
+│   ├── components        
+│   │   ├── Search        
+│   │   │   ├── Search.tsx
+│   │   │   └── style.ts  
+│   │   └── Switch
+│   │       ├── Switch.tsx
+│   │       └── style.ts
+│   ├── hooks
+│   │   └── usePersistedState.ts
+│   ├── index.tsx
+│   ├── pages
+│   │   ├── HomePage
+│   │   │   ├── HomePage.tsx
+│   │   │   └── style.ts
+│   │   └── ProfilePage
+│   │       ├── ProfilePage.tsx
+│   │       └── style.ts
+│   ├── react-app-env.d.ts
+│   ├── routes.tsx
+│   ├── style
+│   │   ├── GlobalStyle.ts
+│   │   ├── styled.d.ts
+│   │   └── themes.ts
+│   └── util
+│       └── periodBetweenDate.tsx
+├── tsconfig.json
+└── yarn.lock
+```
+
