@@ -1,0 +1,5 @@
+checar se o repositório tá vazio pra depois ver se tem commit (já fiz? n sei se tá certo pq estorei o rate limit)
+
+toggleTheme sem precisar passar como filho, usar algo tipo useContext
+modularizar mais partes do profilePage
+exibir horas, minutos e segundos no periodBetweenDate
