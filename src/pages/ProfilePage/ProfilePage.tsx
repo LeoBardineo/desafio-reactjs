@@ -196,10 +196,7 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
           <Switch toggleTheme={toggleTheme} />
         </Options>
         {repositories.map((repo) => {
-          const [dateDiff, period] = periodBetweenDate(
-            repo.updated_at,
-            repo.pushed_at,
-          );
+          const [dateDiff, period] = periodBetweenDate(repo.updated_at);
           return (
             <Repository key={repo.id}>
               <RepoName href={repo.html_url} target="_blank">

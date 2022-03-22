@@ -16,7 +16,7 @@ export const dark: DefaultTheme = {
   primary: '#eceff4',
   secondary: '#eceff4',
   text: '#2e3440',
-  subtext: '#47525e',
+  subtext: '#8190A5',
   divider: '#47525e',
   background: '#2e3440',
   inputbackground: '#fafafa',
