@@ -62,6 +62,7 @@ interface Repo {
   name?: string;
   description?: string;
   html_url?: string;
+  size: number;
   stargazers_count: number;
   updated_at: string;
   last_commit: string;
@@ -73,6 +74,7 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
   const [repositories, setRepositories] = useState<Repo[]>([
     {
       stargazers_count: 0,
+      size: 0,
       updated_at: '1970-12-01T00:00:00Z',
       last_commit: '1970-12-01T00:00:00Z',
     },
@@ -111,7 +113,7 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
             const repoMainBranchJson = await repoMainBranch.json();
             return {
               ...repo,
-              last_commit: repoMainBranchJson.commit.commit.committer.date,
+              last_commit: repoMainBranchJson?.commit?.commit?.committer?.date,
             };
           },
         );
@@ -220,12 +222,16 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
                   <FiStar />
                   <InfoText>{repo.stargazers_count} stars</InfoText>
                 </RepoStars>
-                <Dot>&bull;</Dot>
-                <RepoUpdated>
-                  Updated
-                  {` ${dateDiff} ${period} `}
-                  ago
-                </RepoUpdated>
+                {repo.last_commit && (
+                  <>
+                    <Dot>&bull;</Dot>
+                    <RepoUpdated>
+                      Updated
+                      {` ${dateDiff} ${period} `}
+                      ago
+                    </RepoUpdated>
+                  </>
+                )}
               </RepoStats>
             </Repository>
           );
