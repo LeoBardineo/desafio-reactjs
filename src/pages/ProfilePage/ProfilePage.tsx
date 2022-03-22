@@ -64,7 +64,7 @@ interface Repo {
   html_url?: string;
   stargazers_count: number;
   updated_at: string;
-  pushed_at: string;
+  last_commit: string;
 }
 
 const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
@@ -74,7 +74,7 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
     {
       stargazers_count: 0,
       updated_at: '1970-12-01T00:00:00Z',
-      pushed_at: '1970-12-01T00:00:00Z',
+      last_commit: '1970-12-01T00:00:00Z',
     },
   ]);
   const [stars, setStars] = useState(0);
@@ -103,7 +103,19 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
           if (a.stargazers_count < b.stargazers_count) return 1;
           return 0;
         });
-        setRepositories(repositoriesSorted);
+        const promises: Repo[] = await repositoriesSorted.map(
+          async (repo: Repo) => {
+            const repoMainBranch = await fetch(
+              `https://api.github.com/repos/${id}/${repo.name}/branches/master`,
+            );
+            const repoMainBranchJson = await repoMainBranch.json();
+            return {
+              ...repo,
+              last_commit: repoMainBranchJson.commit.commit.committer.date,
+            };
+          },
+        );
+        Promise.all(promises).then((data) => setRepositories(data));
       }
     }
 
@@ -196,7 +208,7 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
           <Switch toggleTheme={toggleTheme} />
         </Options>
         {repositories.map((repo) => {
-          const [dateDiff, period] = periodBetweenDate(repo.updated_at);
+          const [dateDiff, period] = periodBetweenDate(repo.last_commit);
           return (
             <Repository key={repo.id}>
               <RepoName href={repo.html_url} target="_blank">
