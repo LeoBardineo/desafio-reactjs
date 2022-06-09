@@ -67,6 +67,15 @@ interface Repo {
   updated_at: string;
 }
 
+const InvalidPage: React.FC = () => (
+  <Invalid>
+    <h1>Invalid GitHub username</h1>
+    <Link to="/" style={{ textDecoration: 'none' }}>
+      <Button>Voltar</Button>
+    </Link>
+  </Invalid>
+);
+
 const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
   const [invalidUser, setInvalidUser] = useState(false);
   const [dev, setDev] = useState<Dev>({});
@@ -121,12 +130,7 @@ const ProfilePage: React.FC<Props> = ({ toggleTheme }): JSX.Element => {
   }, [repositories]);
 
   return invalidUser ? (
-    <Invalid>
-      <h1>Invalid GitHub username</h1>
-      <Link to="/" style={{ textDecoration: 'none' }}>
-        <Button>Voltar</Button>
-      </Link>
-    </Invalid>
+    <InvalidPage />
   ) : (
     <ProfileWrapper>
       <Developer>
